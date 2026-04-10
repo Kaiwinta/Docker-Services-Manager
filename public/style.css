@@ -158,11 +158,11 @@ h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--te
 .btn-confirm {
     font-family: inherit; font-size: 11px;
     padding: 6px 12px; border-radius: var(--radius-sm);
-    background: var(--primary-bg); color: var(--primary-light);
-    border: 1px solid var(--primary-border);
+    background: var(--danger-bg); color: var(--danger-light);
+    border: 1px solid var(--danger-border);
     cursor: pointer; transition: background 0.15s;
 }
-.btn-confirm:hover { background: var(--primary-hover); }
+.btn-confirm:hover { background: var(--danger-hover); }
 
 /* Footer counters (running/stopped) under the list. */
 .footer {
