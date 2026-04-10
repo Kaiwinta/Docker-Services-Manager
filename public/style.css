@@ -1,0 +1,219 @@
+/* Reset default spacing/box model so layout is predictable across browsers. */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/*
+    Design tokens (CSS variables):
+    Keep colors/radius centralized so the whole theme can be changed in one place.
+*/
+:root {
+    --bg: #120d31;
+    --surface: #1a1740;
+    --surface2: #302f4d;
+    --border: rgba(245, 230, 224, 0.08);
+    --border2: rgba(245, 230, 224, 0.14);
+    --text: #f5e6e0;
+    --muted: #808189;
+    --hint: rgba(245, 230, 224, 0.38);
+    --green: #ce7a12;
+    --green-bg: rgba(206, 122, 18, 0.16);
+    --green-light: #e6b16a;
+    --red: #c96b79;
+    --red-bg: rgba(201, 107, 121, 0.16);
+    --red-light: #f0b9c1;
+    --amber: #ce7a12;
+    --amber-light: #f1c07a;
+    --primary: #ce7a12;
+    --primary-soft: rgba(206, 122, 18, 0.12);
+    --radius: 10px;
+    --radius-sm: 6px;
+}
+
+/* Global page base styles (applies to the whole app). */
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 13px;
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
+}
+
+/* Top bar container for logo/title on left and refresh action on right. */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Horizontal grouping for logo + title/host text. */
+.header-left { display: flex; align-items: center; gap: 12px; }
+
+/* Logo badge background and centering. */
+.logo {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--primary), #e09a32);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+}
+/* Fit the logo image to the badge size. */
+.logo img { width: 36px; height: 36px; display: block; }
+
+/* Main page title + small host label under it. */
+h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); }
+.host { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* Right side tools area in the header. */
+.header-right { display: flex; align-items: center; gap: 10px; }
+
+/* Refresh button styling (subtle by default, stronger on hover). */
+.btn-refresh {
+    background: transparent;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+}
+.btn-refresh:hover { color: var(--text); border-color: var(--text); }
+
+/* Section title used above container list. */
+.section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--hint);
+    margin: 1.5rem 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+/* Decorative line that extends after the section label text. */
+.section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+/* Card style for each standalone container row block. */
+.standalone-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 6px;
+    transition: border-color 0.15s;
+}
+.standalone-card:hover { border-color: var(--border2); }
+
+/* Horizontal row: status dot, info, and action buttons. */
+.card-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+}
+
+/* Status indicator dot and color variants. */
+.status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.dot-running { background: var(--green); box-shadow: 0 0 0 2px var(--green-bg); }
+.dot-stopped { background: var(--hint); }
+/* Loading state uses amber + blink animation to show in-progress action. */
+.dot-loading { background: var(--amber); animation: blink 0.8s ease infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* Name + metadata text area takes available horizontal space. */
+.card-info { flex: 1; min-width: 0; }
+.card-name { font-size: 12px; font-weight: 600; color: var(--text); }
+/* Prevent long image/status strings from breaking layout. */
+.card-meta { font-size: 11px; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Small capsule label ("standalone") next to the container name. */
+.badge {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.05em;
+    padding: 2px 6px; border-radius: 20px; margin-left: 5px;
+}
+.badge-standalone { background: var(--surface2); color: var(--muted); border: 1px solid var(--border2); }
+
+/* Action buttons area on the right side of a row. */
+.card-actions { display: flex; gap: 5px; flex-shrink: 0; }
+
+/* Base button style used by all actions. */
+.btn {
+    font-family: inherit;
+    font-size: 11px;
+    padding: 4px 9px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+/* Semantic button variants for start/stop actions. */
+.btn-start { color: var(--green-light); border-color: rgba(230,177,106,0.3); }
+.btn-start:hover { background: var(--primary-soft); border-color: var(--green-light); }
+.btn-stop { color: var(--red-light); border-color: rgba(240,185,193,0.3); }
+.btn-stop:hover { background: var(--red-bg); border-color: var(--red-light); }
+
+/* Confirm/destructive-leaning action style in the dialog. */
+.btn-confirm {
+    font-family: inherit; font-size: 11px;
+    padding: 6px 12px; border-radius: var(--radius-sm);
+    background: var(--primary-soft); color: var(--amber-light);
+    border: 1px solid rgba(241, 192, 122, 0.3);
+    cursor: pointer; transition: background 0.15s;
+}
+.btn-confirm:hover { background: rgba(206, 122, 18, 0.28); }
+
+/* Footer counters (running/stopped) under the list. */
+.footer {
+    border-top: 1px solid var(--border);
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.footer-stat { font-size: 11px; color: var(--muted); }
+.footer-stat span { color: var(--text); font-weight: 600; }
+
+/* Confirmation dialog backdrop and modal panel. */
+.dialog-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    align-items: center; justify-content: center;
+    z-index: 50;
+}
+/* Visible state toggled by JS when asking for confirmation. */
+.dialog-backdrop.open { display: flex; }
+.dialog {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    width: 320px;
+    max-width: 90vw;
+}
+/* Dialog typography and action layout. */
+.dialog h2 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.dialog p { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+.dialog-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+
+/* Thin custom scrollbar styling for WebKit-based browsers. */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 2px; }

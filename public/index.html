@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docker Services Manager</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="logo">
+      <img src="assets/logo.svg" alt="Somehow a whale?" />
+    </div>
+    <div>
+      <h1>Docker Services Manager</h1>
+      <div class="host" id="host-label">loading...</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <button class="btn-refresh" onclick="loadContainers()">↻ Refresh</button>
+  </div>
+</header>
+
+<div id="main">
+  <!-- Here will be the list of containers... -->
+</div>
+
+<div class="footer">
+  <div class="footer-stat">Running : <span id="count-running">—</span></div>
+  <div class="footer-stat">Stopped : <span id="count-stopped">—</span></div>
+</div>
+
+<div class="dialog-backdrop" id="dialog">
+  <div class="dialog">
+    <h2 id="dialog-title">Confirm</h2>
+    <p id="dialog-body"></p>
+    <div class="dialog-actions">
+      <button class="btn" onclick="closeDialog()">Cancel</button>
+      <button class="btn-confirm" id="dialog-ok">Confirm</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
