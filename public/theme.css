@@ -1,0 +1,49 @@
+:root {
+  /* Surfaces & Backgrounds */
+  --bg: #120d31;
+  --surface: #1a1740;
+  --surface-2: #302f4d;
+  --surface-3: #2a2948;
+  --surface-faint: rgba(255, 255, 255, 0.03);
+  --panel-overlay: rgba(6, 7, 15, 0.68);
+  --panel-shadow: rgba(0, 0, 0, 0.45);
+
+  /* Borders & Dividers */
+  --border: rgba(245, 230, 224, 0.08);
+  --border-strong: rgba(245, 230, 224, 0.14);
+  --border-hover: rgba(255, 255, 255, 0.2);
+
+  /* Text Colors */
+  --text: #f5e6e0;
+  --muted: #808189;
+  --hint: rgba(245, 230, 224, 0.38);
+
+  /* Primary Color (Brand) */
+  --primary: #ce7a12;
+  --primary-bg: rgba(206, 122, 18, 0.12);
+  --primary-light: #f1c07a;
+  --primary-hover: rgba(206, 122, 18, 0.28);
+  --primary-border: rgba(241, 192, 122, 0.3);
+  --primary-focus-ring: rgba(206, 122, 18, 0.16);
+
+  /* Success Color (Green) */
+  --success: #ce7a12;
+  --success-bg: rgba(206, 122, 18, 0.16);
+  --success-light: #e6b16a;
+  --success-hover: rgba(206, 122, 18, 0.28);
+  --success-border: rgba(230, 177, 106, 0.3);
+  --success-focus-ring: rgba(206, 122, 18, 0.16);
+
+  /* Danger Color (Red) */
+  --danger: #c96b79;
+  --danger-bg: rgba(201, 107, 121, 0.16);
+  --danger-light: #f0b9c1;
+  --danger-hover: rgba(201, 107, 121, 0.28);
+  --danger-border: rgba(240, 185, 193, 0.3);
+  --danger-focus-ring: rgba(201, 107, 121, 0.16);
+
+  /* Utilities */
+  --scrollbar-thumb: var(--muted);
+  --radius: 10px;
+  --radius-sm: 6px;
+}

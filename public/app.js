@@ -91,5 +91,17 @@ let containers = [];
     document.getElementById('dialog').classList.remove('open');
   }
 
+  function showAddServiceDialog() {
+    const dialog = document.querySelector('add-service-dialog');
+    if (dialog) {
+      dialog.open({
+        title: 'Add new service',
+        body: 'Select the archive for the service you want to add.',
+        confirmText: 'Add Service',
+      });
+    }
+  }
+
+
   loadContainers();
   setInterval(loadContainers, 10000);

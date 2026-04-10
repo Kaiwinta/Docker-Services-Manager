@@ -1,0 +1,33 @@
+<div class="backdrop" part="backdrop" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="add-service-title">
+    <h2 id="add-service-title">Add new service</h2>
+    <p id="add-service-body">Select the archive for the service you want to add.</p>
+
+    <div class="tab">
+      <button type="button" class="tablinks" data-tab="Zip">Zip</button>
+      <button type="button" class="tablinks" data-tab="Github">Github</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="Zip" class="tabcontent">
+      <label class="file-field" for="add-service-file">
+        <span>Zip folder</span>
+        <input id="add-service-file" type="file" accept=".zip,.tar,.tar.gz" />
+      </label>
+    </div>
+    <div id="Github" class="tabcontent">
+      <label class="file-field" for="add-service-github-url">
+        <span>Github repository URL</span>
+        <input id="add-service-github-url" type="url" placeholder="https://github.com/user/repo" />
+      </label>
+    </div>
+    <!-- End of tab content -->
+
+    <div class="actions">
+      <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+      <button type="button" class="btn btn-primary" data-action="confirm">Add Service</button>
+    </div>
+  </div>
+</div>
+
+

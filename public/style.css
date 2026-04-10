@@ -1,33 +1,6 @@
 /* Reset default spacing/box model so layout is predictable across browsers. */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/*
-    Design tokens (CSS variables):
-    Keep colors/radius centralized so the whole theme can be changed in one place.
-*/
-:root {
-    --bg: #120d31;
-    --surface: #1a1740;
-    --surface2: #302f4d;
-    --border: rgba(245, 230, 224, 0.08);
-    --border2: rgba(245, 230, 224, 0.14);
-    --text: #f5e6e0;
-    --muted: #808189;
-    --hint: rgba(245, 230, 224, 0.38);
-    --green: #ce7a12;
-    --green-bg: rgba(206, 122, 18, 0.16);
-    --green-light: #e6b16a;
-    --red: #c96b79;
-    --red-bg: rgba(201, 107, 121, 0.16);
-    --red-light: #f0b9c1;
-    --amber: #ce7a12;
-    --amber-light: #f1c07a;
-    --primary: #ce7a12;
-    --primary-soft: rgba(206, 122, 18, 0.12);
-    --radius: 10px;
-    --radius-sm: 6px;
-}
-
 /* Global page base styles (applies to the whole app). */
 body {
     background: var(--bg);
@@ -71,7 +44,7 @@ h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--te
 /* Refresh button styling (subtle by default, stronger on hover). */
 .btn-refresh {
     background: transparent;
-    border: 1px solid var(--border2);
+    border: 1px solid var(--border-strong);
     color: var(--muted);
     font-family: inherit;
     font-size: 11px;
@@ -81,6 +54,20 @@ h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--te
     transition: color 0.15s, border-color 0.15s;
 }
 .btn-refresh:hover { color: var(--text); border-color: var(--text); }
+
+.btn-add-service {
+    background: var(--success-bg);
+    border: 1px solid var(--border-strong);
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+}
+.btn-add-service:hover { color: var(--text); border-color: var(--text); }
+
 
 /* Section title used above container list. */
 .section-label {
@@ -111,7 +98,7 @@ h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--te
     margin-bottom: 6px;
     transition: border-color 0.15s;
 }
-.standalone-card:hover { border-color: var(--border2); }
+.standalone-card:hover { border-color: var(--border-strong); }
 
 /* Horizontal row: status dot, info, and action buttons. */
 .card-row {
@@ -123,10 +110,10 @@ h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--te
 
 /* Status indicator dot and color variants. */
 .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.dot-running { background: var(--green); box-shadow: 0 0 0 2px var(--green-bg); }
+.dot-running { background: var(--success); box-shadow: 0 0 0 2px var(--success-bg); }
 .dot-stopped { background: var(--hint); }
-/* Loading state uses amber + blink animation to show in-progress action. */
-.dot-loading { background: var(--amber); animation: blink 0.8s ease infinite; }
+/* Loading state uses primary + blink animation to show in-progress action. */
+.dot-loading { background: var(--primary); animation: blink 0.8s ease infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
 /* Name + metadata text area takes available horizontal space. */
@@ -140,7 +127,7 @@ h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--te
     font-size: 9px; font-weight: 600; letter-spacing: 0.05em;
     padding: 2px 6px; border-radius: 20px; margin-left: 5px;
 }
-.badge-standalone { background: var(--surface2); color: var(--muted); border: 1px solid var(--border2); }
+.badge-standalone { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border-strong); }
 
 /* Action buttons area on the right side of a row. */
 .card-actions { display: flex; gap: 5px; flex-shrink: 0; }
@@ -151,7 +138,7 @@ h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--te
     font-size: 11px;
     padding: 4px 9px;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border2);
+    border: 1px solid var(--border-strong);
     background: transparent;
     color: var(--muted);
     cursor: pointer;
@@ -162,20 +149,20 @@ h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--te
 .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
 
 /* Semantic button variants for start/stop actions. */
-.btn-start { color: var(--green-light); border-color: rgba(230,177,106,0.3); }
-.btn-start:hover { background: var(--primary-soft); border-color: var(--green-light); }
-.btn-stop { color: var(--red-light); border-color: rgba(240,185,193,0.3); }
-.btn-stop:hover { background: var(--red-bg); border-color: var(--red-light); }
+.btn-start { color: var(--success-light); border-color: var(--success-border); }
+.btn-start:hover { background: var(--success-bg); border-color: var(--success-light); }
+.btn-stop { color: var(--danger-light); border-color: var(--danger-border); }
+.btn-stop:hover { background: var(--danger-bg); border-color: var(--danger-light); }
 
 /* Confirm/destructive-leaning action style in the dialog. */
 .btn-confirm {
     font-family: inherit; font-size: 11px;
     padding: 6px 12px; border-radius: var(--radius-sm);
-    background: var(--primary-soft); color: var(--amber-light);
-    border: 1px solid rgba(241, 192, 122, 0.3);
+    background: var(--primary-bg); color: var(--primary-light);
+    border: 1px solid var(--primary-border);
     cursor: pointer; transition: background 0.15s;
 }
-.btn-confirm:hover { background: rgba(206, 122, 18, 0.28); }
+.btn-confirm:hover { background: var(--primary-hover); }
 
 /* Footer counters (running/stopped) under the list. */
 .footer {
@@ -200,8 +187,8 @@ h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--te
 /* Visible state toggled by JS when asking for confirmation. */
 .dialog-backdrop.open { display: flex; }
 .dialog {
-    background: var(--surface2);
-    border: 1px solid var(--border2);
+    background: var(--surface-2);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius);
     padding: 1.25rem;
     width: 320px;
