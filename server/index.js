@@ -94,6 +94,26 @@ app.get('/api/containers/:name/inspect', async (req, res) => {
   }
 });
 
+app.post('/api/services/add/url/:name', async (req, res) => {
+  try {
+    // Here i need to clone the github and then call a servic ewith the fodler
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+})
+
+app.post('/api/services/add/zip/:name', async (req, res) => {
+  try {
+    // Here i need to unzip the folder and then call a servic ewith the fodler
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+})
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+
+
 // ─── Démarrage ────────────────────────────────────────────────────────────────
 
 const PORT = process.env.PORT || 3000;

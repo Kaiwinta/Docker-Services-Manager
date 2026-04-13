@@ -5,14 +5,21 @@
 
     <div class="tab">
       <button type="button" class="tablinks" data-tab="Zip">Zip</button>
+      <button type="button" class="tablinks" data-tab="Folder">Folder</button>
       <button type="button" class="tablinks" data-tab="Github">Github</button>
     </div>
 
     <!-- Tab content -->
     <div id="Zip" class="tabcontent">
-      <label class="file-field" for="add-service-file">
-        <span>Zip folder</span>
-        <input id="add-service-file" type="file" accept=".zip,.tar,.tar.gz" />
+      <label class="file-field" for="add-service-zip">
+        <span>Zip</span>
+        <input id="add-service-zip" type="file" accept=".zip,.tar,.tar.gz" />
+      </label>
+    </div>
+    <div id="Folder" class="tabcontent">
+      <label class="file-field" for="add-service-folder">
+        <span>Source folder</span>
+        <input id="add-service-folder" type="file" webkitdirectory directory multiple />
       </label>
     </div>
     <div id="Github" class="tabcontent">

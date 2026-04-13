@@ -5,6 +5,7 @@ class AddServiceDialog extends HTMLElement {
     this._ready = false;
     this._openRequested = false;
     this._config = this._defaultConfig();
+    this._selectedTab = this._config.defaultTab;
   }
 
   connectedCallback() {
@@ -28,7 +29,9 @@ class AddServiceDialog extends HTMLElement {
     this._backdrop = this.shadowRoot.querySelector('.backdrop');
     this._title = this.shadowRoot.getElementById('add-service-title');
     this._body = this.shadowRoot.getElementById('add-service-body');
-    this._fileInput = this.shadowRoot.getElementById('add-service-file');
+    this._zipInput = this.shadowRoot.getElementById('add-service-zip');
+    this._folderInput = this.shadowRoot.getElementById('add-service-folder');
+    this._githubUrlInput = this.shadowRoot.getElementById('add-service-github-url');
     this._tabButtons = Array.from(this.shadowRoot.querySelectorAll('.tablinks'));
     this._tabPanels = Array.from(this.shadowRoot.querySelectorAll('.tabcontent'));
 
@@ -55,6 +58,7 @@ class AddServiceDialog extends HTMLElement {
       title: 'Add new service',
       body: 'Select the archive for the service you want to add.',
       confirmText: 'Add Service',
+      defaultTab: 'Zip',
     };
   }
 
@@ -84,13 +88,15 @@ class AddServiceDialog extends HTMLElement {
     this.shadowRoot.querySelector('[data-action="confirm"]').textContent = this._config.confirmText;
     this._backdrop.hidden = false;
     this._backdrop.classList.add('open');
-    this._selectTab('Zip');
+    this._selectTab(this._config.defaultTab);
   }
 
   _selectTab(tabName, activeButton = null) {
     if (!this.shadowRoot) {
       return;
     }
+
+    this._selectedTab = tabName;
 
     this._tabPanels.forEach((panel) => {
       panel.style.display = panel.id === tabName ? 'block' : 'none';
@@ -101,15 +107,37 @@ class AddServiceDialog extends HTMLElement {
     });
   }
 
-  _submit() {
-    const files = Array.from(this._fileInput.files || []);
-    this.dispatchEvent(new CustomEvent('add-service-submit', {
-      detail: { files },
-      bubbles: true,
-      composed: true,
-    }));
-    this.close();
+  async _submit() {
+    const tab = this._selectedTab;
+
+    if (tab === 'Zip') {
+      const file = this._zipInput.files[0];
+      if (!file) {
+        return;
+      }
+      this.close();
+      return;
+    }
+
+    if (tab === 'Folder') {
+      const files = Array.from(this._folderInput.files || []);
+      if (!files.length) {
+        return;
+      }
+      this.close();
+      return;
+    }
+
+    if (tab === 'Github') {
+      const url = this._githubUrlInput.value.trim();
+      if (!url) {
+        return;
+      }
+      this.close();
+      return;
+    }
   }
+
 }
 if (!customElements.get('add-service-dialog')) {
   customElements.define('add-service-dialog', AddServiceDialog);
