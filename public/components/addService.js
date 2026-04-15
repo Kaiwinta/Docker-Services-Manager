@@ -115,15 +115,35 @@ class AddServiceDialog extends HTMLElement {
       if (!file) {
         return;
       }
+      const formData = new FormData();
+      formData.append('file', file);
+      await fetch('/api/services/upload/zip/', {
+        method: 'POST',
+        body: formData,
+      });
       this.close();
       return;
     }
 
     if (tab === 'Folder') {
       const files = Array.from(this._folderInput.files || []);
-      if (!files.length) {
-        return;
+      if (!files.length) return;
+
+      const zip = new JSZip();
+
+      for (const file of files) {
+        const path = file.webkitRelativePath;
+        zip.file(path, file);
       }
+
+      const zipBlob = await zip.generateAsync({ type: "blob" });
+
+      const formData = new FormData();
+      formData.append('file', zipBlob, "folder.zip");
+      await fetch('/api/services/upload/zip/', {
+        method: 'POST',
+        body: formData,
+      });
       this.close();
       return;
     }
@@ -133,6 +153,19 @@ class AddServiceDialog extends HTMLElement {
       if (!url) {
         return;
       }
+      const res = await fetch('/api/services/upload/url/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      });
+      if (!res.ok) {
+        const errorData = await res.json();
+        alert(`Error: ${errorData.error}`);
+        this.close();
+        return;
+      }
+      const result = await res.json();
+      console.log("Service added:", result);
       this.close();
       return;
     }
